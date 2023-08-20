@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
   addPhotoButton:{
     borderWidth:1,
     borderColor:"rgb(255, 108, 0)",
+    backgroundColor:'white',
     width:25,
     height:25,
     borderRadius:'50%',
@@ -66,6 +67,7 @@ const styles = StyleSheet.create({
     position:'absolute',
     bottom:15,
     left:107,
+
     
 
   },
