@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
   },
   formWrap: {
     width: "100%",
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: 16,
+    paddingRight: 16,
 
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
@@ -67,9 +67,6 @@ const styles = StyleSheet.create({
     position:'absolute',
     bottom:15,
     left:107,
-
-    
-
   },
   titleContainer: {
     alignItems: "center",

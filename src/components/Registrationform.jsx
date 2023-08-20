@@ -30,11 +30,10 @@ export const RegistrationForm = () => {
   );
 };
 const styles = StyleSheet.create({
-    formContainer:{
-        marginTop:20
-    },
+  formContainer: {
+    marginTop: 20,
+  },
   input: {
-    
     height: 50,
     backgroundColor: "rgb(250, 250, 250)",
     borderColor: "lightgray",
@@ -52,7 +51,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     marginBottom: 15,
-    
   },
   passwordInput: {
     flex: 1,
@@ -64,22 +62,19 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 10,
     padding: 10,
-    
   },
   showHideButtonText: {
     color: "rgb(27, 67, 113)",
     fontSize: 16,
   },
   registrationBtn: {
-   
     backgroundColor: "rgb(255, 108, 0)",
     height: 50,
     borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",
-    marginTop:30,
-    marginBottom:15,
-
+    marginTop: 30,
+    marginBottom: 15,
   },
   btnText: {
     color: "white",
