@@ -1,3 +1,5 @@
+import React from "react";
+import { useState } from "react";
 import {
   TextInput,
   View,
@@ -6,10 +8,23 @@ import {
   Text,
 } from "react-native";
 export const LoginForm = () => {
+  const [activeInput, setActiveInput] = useState(null);
   return (
     <View style={styles.formContainer}>
-      <TextInput placeholder="Адреса електронної пошти" style={styles.input} />
-      <View style={styles.passwordInputContainer}>
+      <TextInput
+        placeholder="Адреса електронної пошти"
+        style={[styles.input, activeInput === "email" && styles.activeInput]}
+        onFocus={() => setActiveInput("email")}
+        onBlur={() => setActiveInput(null)}
+      />
+      <View
+        style={[
+          styles.passwordInputContainer,
+          activeInput === "password" && styles.activeInput,
+        ]}
+        onFocus={() => setActiveInput("password")}
+        onBlur={() => setActiveInput(null)}
+      >
         <TextInput
           placeholder="Пароль"
           style={[styles.passwordInput, { paddingRight: 50 }]}
@@ -43,6 +58,10 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     marginBottom: 15,
     fontSize: 16,
+  },
+  activeInput: {
+    backgroundColor: "white",
+    borderColor: "rgb(255, 108, 0)",
   },
   passwordInputContainer: {
     flexDirection: "row",
