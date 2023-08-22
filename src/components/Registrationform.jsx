@@ -6,48 +6,68 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 export const RegistrationForm = () => {
   const [activeInput, setActiveInput] = useState(null);
+  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onRegister = () => {
+    console.log(`Login: ${login} Email: ${email} Password: ${password}`);
+  };
   return (
-    <View style={styles.formContainer}>
-      <TextInput
-        placeholder="Логін"
-        style={[styles.input, activeInput === "login" && styles.activeInput]}
-        onFocus={() => setActiveInput("login")}
-        onBlur={() => setActiveInput(null)}
-      />
-      <TextInput
-        placeholder="Адреса електронної пошти"
-        style={[styles.input, activeInput === "email" && styles.activeInput]}
-        onFocus={() => setActiveInput("email")}
-        onBlur={() => setActiveInput(null)}
-      />
-      <View
-        style={[
-          styles.passwordInputContainer,
-          activeInput === "password" && styles.activeInput,
-        ]}
-        onFocus={() => setActiveInput("password")}
-        onBlur={() => setActiveInput(null)}
-      >
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.formContainer}>
         <TextInput
-          placeholder="Пароль"
-          style={[styles.passwordInput, { paddingRight: 50 }]}
+          placeholder="Логін"
+          style={[styles.input, activeInput === "login" && styles.activeInput]}
+          onFocus={() => setActiveInput("login")}
+          onBlur={() => setActiveInput(null)}
+          value={login}
+          onChangeText={setLogin}
         />
-        <TouchableOpacity style={styles.showHideButton}>
-          <Text style={styles.showHideButtonText}>Показати</Text>
+        <TextInput
+          placeholder="Адреса електронної пошти"
+          style={[styles.input, activeInput === "email" && styles.activeInput]}
+          onFocus={() => setActiveInput("email")}
+          onBlur={() => setActiveInput(null)}
+          value={email}
+          onChangeText={setEmail}
+        />
+        <View
+          style={[
+            styles.passwordInputContainer,
+            activeInput === "password" && styles.activeInput,
+          ]}
+          onFocus={() => setActiveInput("password")}
+          onBlur={() => setActiveInput(null)}
+        >
+          <TextInput
+            placeholder="Пароль"
+            style={[styles.passwordInput, { paddingRight: 50 }]}
+            autoCapitalize="none"
+            value={password}
+            onChangeText={setPassword}
+          />
+          <TouchableOpacity style={styles.showHideButton}>
+            <Text style={styles.showHideButtonText}>Показати</Text>
+          </TouchableOpacity>
+        </View>
+  
+        <TouchableOpacity style={styles.registrationBtn} onPress={onRegister}>
+          <Text style={styles.btnText}>Зареєструватися</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.loginLink}>
+          <Text style={styles.loginLinkText}>Вже є акаунт? Увійти</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.registrationBtn}>
-        <Text style={styles.btnText}>Зареєструватися</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.loginLink}>
-        <Text style={styles.loginLinkText}>Вже є акаунт? Увійти</Text>
-      </TouchableOpacity>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
+
 const styles = StyleSheet.create({
   formContainer: {
     marginTop: 20,

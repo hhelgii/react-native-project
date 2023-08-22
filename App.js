@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import { LoginForm } from './src/components/LoginForm';
+import { RegistrationForm } from './src/components/Registrationform';
 import { RegistrationScreen } from './src/screens/RegistrationScreen';
 import { LoginScreen } from './src/screens/LoginScreen';
 export default function App() {
@@ -8,8 +8,9 @@ export default function App() {
     <View style={styles.container}>
       {/* <Text>Open up App.js to start working on your app! Hello</Text> */}
       <StatusBar style="auto" />
-      {/* <RegistrationScreen></RegistrationScreen> */}
-      <LoginScreen></LoginScreen>
+      <RegistrationScreen></RegistrationScreen>
+      {/* <RegistrationForm></RegistrationForm> */}
+      {/* <LoginScreen></LoginScreen> */}
     </View>
   );
 }
@@ -19,6 +20,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     justifyContent: 'center',
+    // justifyContent: 'flex-end',
+    // paddingBottom:100
+    
   },
 
 });

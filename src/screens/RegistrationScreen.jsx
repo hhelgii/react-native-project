@@ -4,6 +4,9 @@ import {
   Text,
   ImageBackground,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView
 } from "react-native";
 import { RegistrationForm } from "../components/Registrationform";
 import { AntDesign } from "@expo/vector-icons";
@@ -14,17 +17,19 @@ export const RegistrationScreen = () => {
       source={backgroundImagePath}
       style={styles.registrationScreenContainer}
     >
-      <View style={styles.formWrap}>
-        <View style={styles.userImagePlaceholder}>
-          <TouchableOpacity style={styles.addPhotoButton}>
-            <AntDesign name="plus" size={15} color="rgb(255, 108, 0)" />
-          </TouchableOpacity>
+      <KeyboardAvoidingView behavior={'padding'} keyboardVerticalOffset={-200}>
+        <View style={styles.formWrap}>
+          <View style={styles.userImagePlaceholder}>
+            <TouchableOpacity style={styles.addPhotoButton}>
+              <AntDesign name="plus" size={15} color="rgb(255, 108, 0)" />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>Реєстрація</Text>
+          </View>
+          <RegistrationForm />
         </View>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Реєстрація</Text>
-        </View>
-        <RegistrationForm />
-      </View>
+      </KeyboardAvoidingView >
     </ImageBackground>
   );
 };
@@ -32,7 +37,7 @@ const styles = StyleSheet.create({
   registrationScreenContainer: {
     flex: 1,
     justifyContent: "flex-end",
-    alignItems: "center",
+    
     resizeMode: "cover",
   },
   formWrap: {
@@ -45,6 +50,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     paddingVertical: 80,
     position: "relative",
+    
   },
   userImagePlaceholder: {
     width: 120,

@@ -28,6 +28,7 @@ export const LoginForm = () => {
         <TextInput
           placeholder="Пароль"
           style={[styles.passwordInput, { paddingRight: 50 }]}
+          autoCapitalize="none"
         />
         <TouchableOpacity style={styles.showHideButton}>
           <Text style={styles.showHideButtonText}>Показати</Text>
