@@ -6,14 +6,49 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
+  Alert,
 } from "react-native";
 export const LoginForm = () => {
   const [activeInput, setActiveInput] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const isEmailValid = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const isPasswordValid = (password) => {
+    return password.length >= 6;
+  };
+  const onLogin = () => {
+    if (!isEmailValid(email)) {
+      Alert.alert("Некоректна електронна пошта");
+      // console.log("Некоректна електронна пошта");
+      return;
+    }
+
+    if (!isPasswordValid(password)) {
+      Alert.alert("Пароль має бути мінімум 6 символів");
+      // console.log("Пароль має бути мінімум 6 символів");
+      return;
+    }
+    console.log(` Email: ${email} Password: ${password}`);
+    setEmail("");
+    setPassword("");
+    setShowPassword(false);
+  };
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <View style={styles.formContainer}>
       <TextInput
         placeholder="Адреса електронної пошти"
         style={[styles.input, activeInput === "email" && styles.activeInput]}
+        value={email}
+        onChangeText={setEmail}
         onFocus={() => setActiveInput("email")}
         onBlur={() => setActiveInput(null)}
       />
@@ -28,13 +63,21 @@ export const LoginForm = () => {
         <TextInput
           placeholder="Пароль"
           style={[styles.passwordInput, { paddingRight: 50 }]}
+          value={password}
+          secureTextEntry={!showPassword}
+          onChangeText={setPassword}
           autoCapitalize="none"
         />
-        <TouchableOpacity style={styles.showHideButton}>
-          <Text style={styles.showHideButtonText}>Показати</Text>
+        <TouchableOpacity
+          style={styles.showHideButton}
+          onPress={toggleShowPassword}
+        >
+          <Text style={styles.showHideButtonText}>
+            {showPassword ? "Приховати" : "Показати"}
+          </Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.loginBtn}>
+      <TouchableOpacity style={styles.loginBtn} onPress={onLogin}>
         <Text style={styles.btnText}>Увійти</Text>
       </TouchableOpacity>
       <TouchableOpacity>

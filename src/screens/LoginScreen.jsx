@@ -3,30 +3,38 @@ import {
   View,
   Text,
   ImageBackground,
-  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView,
 } from "react-native";
 import { LoginForm } from "../components/LoginForm";
 const backgroundImagePath = require("../assets/background.png");
 export const LoginScreen = () => {
   return (
-    <ImageBackground
-      source={backgroundImagePath}
-      style={styles.loginScreenContainer}
-    >
-      <View style={styles.formWrap}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Увійти</Text>
-        </View>
-        <LoginForm></LoginForm>
-      </View>
-    </ImageBackground>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <ImageBackground
+        source={backgroundImagePath}
+        style={styles.loginScreenContainer}
+      >
+        <KeyboardAvoidingView
+          behavior={"padding"}
+          keyboardVerticalOffset={-300}
+        >
+          <View style={styles.formWrap}>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>Увійти</Text>
+            </View>
+            <LoginForm></LoginForm>
+          </View>
+        </KeyboardAvoidingView>
+      </ImageBackground>
+    </TouchableWithoutFeedback>
   );
 };
 const styles = StyleSheet.create({
   loginScreenContainer: {
     flex: 1,
     justifyContent: "flex-end",
-    alignItems: "center",
     resizeMode: "cover",
   },
   formWrap: {

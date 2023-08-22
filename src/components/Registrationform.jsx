@@ -6,65 +6,94 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
-  Keyboard,
-  TouchableWithoutFeedback,
+  Alert,
 } from "react-native";
 export const RegistrationForm = () => {
   const [activeInput, setActiveInput] = useState(null);
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const isEmailValid = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
+  const isPasswordValid = (password) => {
+    return password.length >= 6;
+  };
   const onRegister = () => {
+    if (!isEmailValid(email)) {
+      Alert.alert("Некоректна електронна пошта");
+      // console.log("Некоректна електронна пошта");
+      return;
+    }
+
+    if (!isPasswordValid(password)) {
+      Alert.alert("Пароль має бути мінімум 6 символів");
+      // console.log("Пароль має бути мінімум 6 символів");
+      return;
+    }
     console.log(`Login: ${login} Email: ${email} Password: ${password}`);
+    setLogin("");
+    setEmail("");
+    setPassword("");
+    setShowPassword(false);
+  };
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.formContainer}>
+    <View style={styles.formContainer}>
+      <TextInput
+        placeholder="Логін"
+        style={[styles.input, activeInput === "login" && styles.activeInput]}
+        onFocus={() => setActiveInput("login")}
+        onBlur={() => setActiveInput(null)}
+        value={login}
+        onChangeText={setLogin}
+      />
+      <TextInput
+        placeholder="Адреса електронної пошти"
+        style={[styles.input, activeInput === "email" && styles.activeInput]}
+        onFocus={() => setActiveInput("email")}
+        onBlur={() => setActiveInput(null)}
+        value={email}
+        onChangeText={setEmail}
+      />
+      <View
+        style={[
+          styles.passwordInputContainer,
+          activeInput === "password" && styles.activeInput,
+        ]}
+        onFocus={() => setActiveInput("password")}
+        onBlur={() => setActiveInput(null)}
+      >
         <TextInput
-          placeholder="Логін"
-          style={[styles.input, activeInput === "login" && styles.activeInput]}
-          onFocus={() => setActiveInput("login")}
-          onBlur={() => setActiveInput(null)}
-          value={login}
-          onChangeText={setLogin}
+          placeholder="Пароль"
+          style={[styles.passwordInput, { paddingRight: 50 }]}
+          autoCapitalize="none"
+          value={password}
+          secureTextEntry={!showPassword}
+          onChangeText={setPassword}
         />
-        <TextInput
-          placeholder="Адреса електронної пошти"
-          style={[styles.input, activeInput === "email" && styles.activeInput]}
-          onFocus={() => setActiveInput("email")}
-          onBlur={() => setActiveInput(null)}
-          value={email}
-          onChangeText={setEmail}
-        />
-        <View
-          style={[
-            styles.passwordInputContainer,
-            activeInput === "password" && styles.activeInput,
-          ]}
-          onFocus={() => setActiveInput("password")}
-          onBlur={() => setActiveInput(null)}
+        <TouchableOpacity
+          style={styles.showHideButton}
+          onPress={toggleShowPassword}
         >
-          <TextInput
-            placeholder="Пароль"
-            style={[styles.passwordInput, { paddingRight: 50 }]}
-            autoCapitalize="none"
-            value={password}
-            onChangeText={setPassword}
-          />
-          <TouchableOpacity style={styles.showHideButton}>
-            <Text style={styles.showHideButtonText}>Показати</Text>
-          </TouchableOpacity>
-        </View>
-  
-        <TouchableOpacity style={styles.registrationBtn} onPress={onRegister}>
-          <Text style={styles.btnText}>Зареєструватися</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.loginLink}>
-          <Text style={styles.loginLinkText}>Вже є акаунт? Увійти</Text>
+          <Text style={styles.showHideButtonText}>
+            {showPassword ? "Приховати" : "Показати"}
+          </Text>
         </TouchableOpacity>
       </View>
-    </TouchableWithoutFeedback>
+
+      <TouchableOpacity style={styles.registrationBtn} onPress={onRegister}>
+        <Text style={styles.btnText}>Зареєструватися</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.loginLink}>
+        <Text style={styles.loginLinkText}>Вже є акаунт? Увійти</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 

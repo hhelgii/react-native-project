@@ -6,38 +6,43 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from "react-native";
 import { RegistrationForm } from "../components/Registrationform";
 import { AntDesign } from "@expo/vector-icons";
 const backgroundImagePath = require("../assets/background.png");
 export const RegistrationScreen = () => {
   return (
-    <ImageBackground
-      source={backgroundImagePath}
-      style={styles.registrationScreenContainer}
-    >
-      <KeyboardAvoidingView behavior={'padding'} keyboardVerticalOffset={-200}>
-        <View style={styles.formWrap}>
-          <View style={styles.userImagePlaceholder}>
-            <TouchableOpacity style={styles.addPhotoButton}>
-              <AntDesign name="plus" size={15} color="rgb(255, 108, 0)" />
-            </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <ImageBackground
+        source={backgroundImagePath}
+        style={styles.registrationScreenContainer}
+      >
+        <KeyboardAvoidingView
+          behavior={"padding"}
+          keyboardVerticalOffset={-200}
+        >
+          <View style={styles.formWrap}>
+            <View style={styles.userImagePlaceholder}>
+              <TouchableOpacity style={styles.addPhotoButton}>
+                <AntDesign name="plus" size={15} color="rgb(255, 108, 0)" />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>Реєстрація</Text>
+            </View>
+            <RegistrationForm />
           </View>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>Реєстрація</Text>
-          </View>
-          <RegistrationForm />
-        </View>
-      </KeyboardAvoidingView >
-    </ImageBackground>
+        </KeyboardAvoidingView>
+      </ImageBackground>
+    </TouchableWithoutFeedback>
   );
 };
 const styles = StyleSheet.create({
   registrationScreenContainer: {
     flex: 1,
     justifyContent: "flex-end",
-    
+
     resizeMode: "cover",
   },
   formWrap: {
@@ -50,7 +55,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     paddingVertical: 80,
     position: "relative",
-    
   },
   userImagePlaceholder: {
     width: 120,
@@ -61,18 +65,18 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     top: -60,
   },
-  addPhotoButton:{
-    borderWidth:1,
-    borderColor:"rgb(255, 108, 0)",
-    backgroundColor:'white',
-    width:25,
-    height:25,
-    borderRadius:12.5,
-    alignItems:'center',
-    justifyContent:'center',
-    position:'absolute',
-    bottom:15,
-    left:107,
+  addPhotoButton: {
+    borderWidth: 1,
+    borderColor: "rgb(255, 108, 0)",
+    backgroundColor: "white",
+    width: 25,
+    height: 25,
+    borderRadius: 12.5,
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    bottom: 15,
+    left: 107,
   },
   titleContainer: {
     alignItems: "center",
