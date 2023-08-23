@@ -9,18 +9,23 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { RegistrationForm } from "../components/Registrationform";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons"; 
+
 const backgroundImagePath = require("../assets/background.png");
 export const RegistrationScreen = () => {
+  
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <ImageBackground
-        source={backgroundImagePath}
-        style={styles.registrationScreenContainer}
-      >
+    <ImageBackground
+      source={backgroundImagePath}
+      style={styles.registrationScreenContainer}
+      resizeMethod="resize"
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView
+         style={{flex: 1, justifyContent: 'flex-end'}} 
           behavior={"padding"}
           keyboardVerticalOffset={-200}
+
         >
           <View style={styles.formWrap}>
             <View style={styles.userImagePlaceholder}>
@@ -34,8 +39,8 @@ export const RegistrationScreen = () => {
             <RegistrationForm />
           </View>
         </KeyboardAvoidingView>
-      </ImageBackground>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
+    </ImageBackground>
   );
 };
 const styles = StyleSheet.create({

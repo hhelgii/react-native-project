@@ -8,12 +8,15 @@ import {
   Text,
   Alert,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 export const RegistrationForm = () => {
   const [activeInput, setActiveInput] = useState(null);
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const navigation = useNavigation();
   const isEmailValid = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -90,7 +93,10 @@ export const RegistrationForm = () => {
       <TouchableOpacity style={styles.registrationBtn} onPress={onRegister}>
         <Text style={styles.btnText}>Зареєструватися</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.loginLink}>
+      <TouchableOpacity
+        style={styles.loginLink}
+        onPress={() => navigation.navigate("Login")}
+      >
         <Text style={styles.loginLinkText}>Вже є акаунт? Увійти</Text>
       </TouchableOpacity>
     </View>

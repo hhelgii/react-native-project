@@ -11,12 +11,14 @@ import { LoginForm } from "../components/LoginForm";
 const backgroundImagePath = require("../assets/background.png");
 export const LoginScreen = () => {
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <ImageBackground
-        source={backgroundImagePath}
-        style={styles.loginScreenContainer}
-      >
+    <ImageBackground
+      source={backgroundImagePath}
+      style={styles.loginScreenContainer}
+      resizeMethod="resize"
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView
+         style={{flex: 1, justifyContent: 'flex-end'}} 
           behavior={"padding"}
           keyboardVerticalOffset={-300}
         >
@@ -27,8 +29,8 @@ export const LoginScreen = () => {
             <LoginForm></LoginForm>
           </View>
         </KeyboardAvoidingView>
-      </ImageBackground>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
+    </ImageBackground>
   );
 };
 const styles = StyleSheet.create({
