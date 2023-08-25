@@ -86,7 +86,7 @@ export const Home = () => {
           headerTitleAlign: "center",
         }}
       ></Tabs.Screen>
-      <Tabs.Screen name="Profile" component={ProfileScreen} />
+      <Tabs.Screen name="Profile" component={ProfileScreen} options={{headerShown:false}}/>
     </Tabs.Navigator>
   );
 };
