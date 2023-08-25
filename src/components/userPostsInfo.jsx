@@ -1,10 +1,10 @@
 import { View, StyleSheet, Text, Image } from "react-native";
-export const UserPostsInfo = ({ name, email }) => {
+export const UserPostsInfo = ({ name, email,avatarPath}) => {
   return (
     <View style={styles.userInfoWrap}>
       <View style={styles.userAvatar}>
         <Image
-          source={require("../assets/user.jpg")}
+          source={avatarPath}
           style={styles.avatarImage}
         />
       </View>

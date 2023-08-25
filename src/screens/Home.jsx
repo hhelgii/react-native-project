@@ -48,6 +48,7 @@ export const Home = () => {
       <Tabs.Screen
         name="CreatePost"
         component={CreatePostsScreen}
+        // options={{ tabBarStyle: { display: 'none' } }}
       ></Tabs.Screen>
       <Tabs.Screen name="Profile" component={ProfileScreen} />
     </Tabs.Navigator>

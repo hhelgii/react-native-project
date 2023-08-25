@@ -1,12 +1,12 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import "react-native-gesture-handler";
 import { RegistrationScreen } from "./src/screens/RegistrationScreen";
 import { LoginScreen } from "./src/screens/LoginScreen";
-import { PostsScreen } from "./src/screens/PostsScreen";
+// import { PostsScreen } from "./src/screens/PostsScreen";
 import { Home } from "./src/screens/Home";
-import "react-native-gesture-handler";
+
 const MainStack = createStackNavigator();
 export default function App() {
   return (
@@ -22,12 +22,13 @@ export default function App() {
           component={LoginScreen}
           options={{ headerShown: false }}
         />
-        <MainStack.Screen name="Posts" component={PostsScreen} />
-        <MainStack.Screen name="Home" component={Home} options={{ headerShown: false }}/>
+        <MainStack.Screen
+          name="Home"
+          component={Home}
+          options={{ headerShown: false }}
+        />
       </MainStack.Navigator>
     </NavigationContainer>
-    // <PostsScreen></PostsScreen>
-    // <Home></Home>
   );
 }
 

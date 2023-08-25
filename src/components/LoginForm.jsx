@@ -40,6 +40,7 @@ export const LoginForm = () => {
     setEmail("");
     setPassword("");
     setShowPassword(false);
+    navigation.navigate("Home")
   };
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
