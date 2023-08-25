@@ -3,6 +3,7 @@ import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 export const PostItem = ({ postTitle, location, commentsAmount, imgPath }) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.postWrap}>
       <View style={styles.imgWrap}>
@@ -11,25 +12,31 @@ export const PostItem = ({ postTitle, location, commentsAmount, imgPath }) => {
       <View style={styles.postInfo}>
         <Text style={styles.postTitle}>{postTitle}</Text>
         <View style={styles.actionsWrap}>
-          <View style={styles.action}>
-            <TouchableOpacity>
+          <View>
+            <TouchableOpacity
+              style={styles.action}
+              onPress={() => navigation.navigate("Comments")}
+            >
               <FontAwesome
                 name="comment-o"
                 size={22}
                 color="rgb(219, 219, 219)"
               />
+              <Text style={styles.comments}>{commentsAmount}</Text>
             </TouchableOpacity>
-            <Text style={styles.comments}>{commentsAmount}</Text>
           </View>
-          <View style={styles.action}>
-            <TouchableOpacity>
+          <View>
+            <TouchableOpacity
+              style={styles.action}
+              onPress={() => navigation.navigate("Map")}
+            >
               <Ionicons
                 name="location-outline"
                 size={24}
                 color="rgb(219, 219, 219)"
               />
+              <Text style={styles.location}>{location}</Text>
             </TouchableOpacity>
-            <Text style={styles.location}>{location}</Text>
           </View>
         </View>
       </View>
@@ -47,12 +54,14 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     width: "100%",
     marginBottom: 10,
+    aspectRatio: 1.43,
+    
   },
   postImg: {
     width: "100%",
-    resizeMode: "cover",
+    height: "100%",
   },
-  postInfo: {},
+
   postTitle: {
     fontWeight: "500",
     fontSize: 16,
@@ -61,23 +70,22 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop:5
+    marginTop: 5,
   },
   action: {
     flexDirection: "row",
-    alignItems: 'baseline',
-    
+    alignItems: "baseline",
   },
   comments: {
     flexDirection: "row",
     color: "rgb(219, 219, 219)",
     fontSize: 16,
-    marginLeft:5,
+    marginLeft: 5,
   },
   location: {
     flexDirection: "row",
     textDecorationLine: "underline",
     fontSize: 16,
-    marginLeft:5,
+    marginLeft: 5,
   },
 });
